@@ -1,7 +1,11 @@
-# Vue 3 + Vite
+SPIEGAZIONE CODICE
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Creo due macrocomponenti chiamati AppHeader ed AppMain
 
-## Recommended IDE Setup
+In AppHeader creo semplicemente un header con all'interno il titolo e il logo della pagina
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+Dopodichè creo altri due componenti figli di AppMain che sono CardList e SingleCard
+In CardList inserisco nei data l'array che contiene tutti i dati delle card (nome, foto, desc ecc.) ed uso questo componente per ciclare sull'array importando poi il componente SingleCard che crea la card singola
+In SingleCard invece creo effettivamente la struttura che prenderà i data importati con i props per creare in pagina la singola card con la sua immagine il titolo ecc.
+
+In AppMain infine importo CardList
