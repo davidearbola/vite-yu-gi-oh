@@ -1,6 +1,6 @@
 <script>
 import SingleCard from "./SingleCard.vue";
-import cards from "../../data/store";
+import store from "../../data/store";
 
 export default {
 	name: "CardList",
@@ -9,14 +9,17 @@ export default {
 	},
 	data() {
 		return {
-			cards,
+			store,
 		};
 	},
 };
 </script>
 
 <template>
-	<div v-for="card in cards" class="col-2 text-center px-3 pb-3 text-white">
+	<div
+		v-for="card in store.carte"
+		class="col-2 text-center px-3 pb-3 text-white"
+	>
 		<SingleCard :card="card" />
 	</div>
 </template>

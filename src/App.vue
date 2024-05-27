@@ -1,7 +1,7 @@
 <script>
 import AppHeader from "./components/Header/AppHeader.vue";
 import AppMain from "./components/Main/AppMain.vue";
-import cards from "./data/store";
+import store from "./data/store.js";
 export default {
 	components: {
 		AppHeader,
@@ -9,10 +9,19 @@ export default {
 	},
 	data() {
 		return {
-			cards,
+			store,
 		};
 	},
-	mounted() {},
+	created() {},
+	mounted() {
+		axios
+			.get(
+				"https://db.ygoprodeck.com/api/v7/cardinfo.php?num=10&offset=0"
+			)
+			.then((risultato) => {
+				this.store.carte = risultato.data.data;
+			});
+	},
 };
 </script>
 
