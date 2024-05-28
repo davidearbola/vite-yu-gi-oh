@@ -12,7 +12,13 @@ export default {
 	data() {
 		return {
 			store,
+			inputValue: "",
 		};
+	},
+	methods: {
+		prova() {
+			console.log(this.inputValue);
+		},
 	},
 	created() {
 		axios
@@ -21,11 +27,16 @@ export default {
 			)
 			.then((risultato) => {
 				this.store.carte = risultato.data.data;
-				for (let carta of this.store.carte) {
-					if (carta.archetype) {
-						console.log(carta.archetype);
-					}
-				}
+				// for (let carta of this.store.carte) {
+				// 	if (carta.archetype) {
+				// 		console.log(carta.archetype);
+				// 	}
+				// }
+			});
+		axios
+			.get("https://db.ygoprodeck.com/api/v7/archetypes.php")
+			.then((risultato) => {
+				this.store.archetypeList = risultato.data;
 			});
 	},
 	mounted() {},
@@ -34,6 +45,15 @@ export default {
 
 <template>
 	<AppHeader />
+	<div class="bg-dark p-2">
+		<select v-model="inputValue">
+			<option value="">Trova Carta</option>
+			<option v-for="archetype in store.archetypeList">
+				{{ archetype.archetype_name }}
+			</option>
+		</select>
+		<button @click="prova()">click</button>
+	</div>
 	<AppMain />
 </template>
 
