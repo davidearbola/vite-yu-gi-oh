@@ -6,11 +6,13 @@ export default {
 </script>
 
 <template>
-	<img :src="card.card_images[0].image_url_small" alt="" />
-	<div class="py-3 my_bg_orange">
-		<p>{{ card.name }}</p>
-		<span class="text-dark">{{ card.archetype }}</span>
-		<span class="text-dark">{{ card.attribute }}</span>
+	<div class="my_bg_orange h-100">
+		<img :src="card.card_images[0].image_url_small" alt="" />
+		<div class="py-3">
+			<p>{{ card.name }}</p>
+			<span class="text-dark">{{ card.archetype }}</span>
+			<span class="text-dark">{{ card.attribute }}</span>
+		</div>
 	</div>
 </template>
 
