@@ -13,33 +13,36 @@ export default {
 		return {
 			store,
 			inputValue: "",
+			linkDefault:
+				"https://db.ygoprodeck.com/api/v7/cardinfo.php?num=100&offset=0",
+			linkArchytypeCard:
+				"https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=",
+			linkArchytypeName:
+				"https://db.ygoprodeck.com/api/v7/archetypes.php",
 		};
 	},
 	methods: {
-		prova() {
-			axios
-				.get(
-					"https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=" +
-						this.inputValue
-				)
-				.then((risultato) => {
-					this.store.carte = risultato.data.data;
-				});
+		getAxiosCard(link) {
+			axios.get(link).then((risultato) => {
+				this.store.carte = risultato.data.data;
+			});
+		},
+		getAxiosArchyList(link) {
+			axios.get(link).then((risultato) => {
+				this.store.archetypeList = risultato.data;
+			});
+		},
+		getCards() {
+			if (this.inputValue) {
+				this.getAxiosCard(this.linkArchytypeCard + this.inputValue);
+			} else {
+				this.getAxiosCard(this.linkDefault);
+			}
 		},
 	},
 	created() {
-		axios
-			.get(
-				"https://db.ygoprodeck.com/api/v7/cardinfo.php?num=100&offset=0"
-			)
-			.then((risultato) => {
-				this.store.carte = risultato.data.data;
-			});
-		axios
-			.get("https://db.ygoprodeck.com/api/v7/archetypes.php")
-			.then((risultato) => {
-				this.store.archetypeList = risultato.data;
-			});
+		this.getAxiosCard(this.linkDefault);
+		this.getAxiosArchyList(this.linkArchytypeName);
 	},
 	mounted() {},
 };
@@ -48,12 +51,15 @@ export default {
 <template>
 	<AppHeader />
 	<div class="bg-dark p-2">
-		<select v-model="inputValue" @change="prova()">
+		<select v-model="inputValue" @change="getCards()">
 			<option value="">Trova Carta</option>
 			<option v-for="archetype in store.archetypeList">
 				{{ archetype.archetype_name }}
 			</option>
 		</select>
+		<span v-if="inputValue" class="text-white ms-3"
+			>Trovate {{ store.carte.length }} carte</span
+		>
 	</div>
 	<AppMain />
 </template>
