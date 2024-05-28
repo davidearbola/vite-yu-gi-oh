@@ -2,6 +2,8 @@
 import AppHeader from "./components/Header/AppHeader.vue";
 import AppMain from "./components/Main/AppMain.vue";
 import store from "./data/store.js";
+import axios from "axios";
+
 export default {
 	components: {
 		AppHeader,
