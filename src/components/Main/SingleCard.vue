@@ -6,7 +6,7 @@ export default {
 </script>
 
 <template>
-	<div class="my_bg_orange h-100">
+	<div class="my_bg_orange h-100 rounded">
 		<img :src="card.card_images[0].image_url_small" alt="" />
 		<div class="py-3">
 			<p>{{ card.name }}</p>
