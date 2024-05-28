@@ -18,7 +18,7 @@ export default {
 <template>
 	<div
 		v-for="card in store.carte"
-		class="col-2 text-center px-3 mb-3 text-white"
+		class="col-2 text-center px-3 pb-3 text-white"
 	>
 		<SingleCard :card="card" />
 	</div>

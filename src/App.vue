@@ -15,10 +15,15 @@ export default {
 	created() {
 		axios
 			.get(
-				"https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0"
+				"https://db.ygoprodeck.com/api/v7/cardinfo.php?num=100&offset=0"
 			)
 			.then((risultato) => {
 				this.store.carte = risultato.data.data;
+				for (let carta of this.store.carte) {
+					if (carta.archetype) {
+						console.log(carta.archetype);
+					}
+				}
 			});
 	},
 	mounted() {},
